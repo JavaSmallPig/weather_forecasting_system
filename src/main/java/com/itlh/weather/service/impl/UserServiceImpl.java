@@ -52,13 +52,14 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 注册
+     *
      * @param registerDto
      */
     @Override
     public void register(RegisterDto registerDto) throws Exception {
         String password = registerDto.getPassword();
         String md5Password = Md5Utils.md5(password, "password");
-        userMapper.save(registerDto.getUsername(),md5Password,registerDto.getEmail());
+        userMapper.save(registerDto.getUsername(), md5Password, registerDto.getEmail());
     }
 
     /**
@@ -70,6 +71,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByName(String username) {
         return userMapper.selectByName(username);
+    }
+
+    /**
+     * 根据id查询用户
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public User findById(int id) {
+        return userMapper.findById(id);
     }
 }
 

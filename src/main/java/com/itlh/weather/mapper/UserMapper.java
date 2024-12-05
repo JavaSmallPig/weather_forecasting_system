@@ -30,6 +30,14 @@ public interface UserMapper {
      */
     @Select("select *from users where username = #{username}")
     User selectByName(String username);
+
+    /**
+     * 根据id查询用户
+     * @param id
+     * @return
+     */
+    @Select("select * from users where id = #{id};")
+    User findById(int id);
 }
 
 

@@ -21,12 +21,23 @@ public class UserController {
     /**
      * 根据用户名查找用户
      *
-     * @param username
+     * @param
      * @return
      */
-    @GetMapping("/select/{username}")
+    @GetMapping("/selByName/{username}")
     public User findByName(@PathVariable("username") String username) {
         return userService.findByName(username);
+    }
+
+    /**
+     * 根据id查询用户
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/selById/{id}")
+    public User findById(@PathVariable("id") int id) {
+        return userService.findById(id);
     }
 
     /**

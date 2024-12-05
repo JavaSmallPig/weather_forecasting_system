@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itlh.weather.util.JWTUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import java.util.Map;
  * @Date 2024/12/3 10:04
  * JWT验证拦截器
  */
+@Component
 public class JWTInterceptor implements HandlerInterceptor {
 
     @Override
@@ -29,6 +31,7 @@ public class JWTInterceptor implements HandlerInterceptor {
             JWTUtils.verify(token);
             //放行请求
             return true;
+
         } catch (SignatureVerificationException e) {
             e.printStackTrace();
             map.put("msg", "无效签名");
@@ -40,7 +43,7 @@ public class JWTInterceptor implements HandlerInterceptor {
             map.put("msg", "token算法不一致");
         } catch (Exception e) {
             e.printStackTrace();
-            map.put("msg", "token失效");
+            map.put("msg", "token错误");
         }
         //设置状态
         map.put("state", false);
